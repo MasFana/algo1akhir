@@ -55,8 +55,9 @@ def login():
             baris_user = users[users['username'] == username]
             password = input(" Password: ")
             if password == baris_user['password'].values[0]:
+                role = baris_user['role'].values[0]
                 Clear_terminal()
-                return username
+                return username,role
             elif password != baris_user['password'].values[0]:
                 Clear_terminal()
                 print(password_text)
