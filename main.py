@@ -2,7 +2,6 @@ import pandas as pd
 import os
 import subprocess
 import csv
-from tabulate import tabulate
 import time
 
 def Clear_terminal():
@@ -123,7 +122,7 @@ def Cari_produk():
     cari = input("Masukkan nama produk yang ingin dicari: ")
     hasil = data[data['nama'].str.contains(cari, case=False, na=False)]
     if hasil.empty == False :
-        print(tabulate(hasil, headers='keys', tablefmt='psql'))
+        print(hasil)
     else:
         print("\n<==> Produk tidak ditemukan <==>")
 
@@ -142,7 +141,7 @@ def List_produk():
     
 """
     print(list_teks)
-    print(tabulate(list, headers='keys', tablefmt='psql'))
+    print(list)
     
     input("Tekan enter untuk kembali ke menu")
     Clear_terminal()
@@ -164,7 +163,7 @@ def Cari_absen(collum,data):
         df = df[df[collum] == int(data)]
     else:
         df = df[df[collum].str.contains(data)]
-    print(tabulate(df,headers='keys',tablefmt='psql'))
+    print(df)
     print(f"Jumlah Data {data} :",df.shape[0])
     
 def Absensi(username):
