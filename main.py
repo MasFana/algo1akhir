@@ -86,8 +86,10 @@ def Menu(user="",role="pegawai"):
         print("║│                                │║")
         print("║│  1. Daftar Produk              │║")
         print("║│  2. Cari Produk                │║")
-        print("║│  3. Terima Dispatch            │║")
-        print("║│  4. Absensi                    │║")
+        print("║│  3. Update Data Produk         │║")
+        print("║│  4. Terima Dispatch            │║")
+        print("║│  5. Absensi                    │║")
+        print("║│  6. Keluar                     │║")
         print("║├────────────────────────────────┤║")
         print(f"║│ Pegawai : {user}{' '*(21-len(user))}│║")
         print("║└────────────────────────────────┘║")
@@ -100,6 +102,7 @@ def Menu(user="",role="pegawai"):
         print("║│  5. Histori                    │║")
         print("║│  6. Absensi pegawai            │║")
         print("║│  7. Dispatch                   │║")
+        print("║│  8. Keluar                     │║")
         print("║├────────────────────────────────┤║")
         print("║│            Menu Admin          │║")
         print("║└────────────────────────────────┘║")
@@ -219,9 +222,44 @@ def Absensi(username):
         Clear_terminal()
 
 
-Menu(login())
 
-
+username,role = login()
+while True:
+    Menu(username,role)
+    if role == "pegawai":
+        menu = input("  Pilih menu: ")
+        match menu:
+            case "1":
+                List_produk()
+            case "2":
+                Cari_produk()
+            # case "3":
+            #     Update_produk()
+            # case "4":
+            #     Terima_dispatch()
+            case "5":
+                Absensi(username)
+            case "6":
+                break
+    elif role == "admin":
+        menu = input("  Pilih menu: ")
+        match menu:
+            case "1":
+                List_produk()
+            case "2":
+                Cari_produk()
+            # case "3":
+            #     Update_produk()
+            # case "4":
+            #     Hapus_produk()
+            # case "5":
+            #     Histori()
+            case "6":
+                Absensi(username)
+            # case "7":
+            #     Dispatch()
+            case "8":
+                break
 
 
 
