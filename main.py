@@ -129,7 +129,7 @@ def Cari_produk():
     input("\nTekan enter untuk kembali ke menu")
     Clear_terminal()
     
-def List_produk():
+def Daftar_produk():
     list =pd.read_csv("produk.csv")
     list_teks ="""
  _      _     _     _____               _       _    
@@ -143,7 +143,7 @@ def List_produk():
     print(list_teks)
     print(list)
     
-    input("Tekan enter untuk kembali ke menu")
+    input("\nTekan enter untuk kembali ke menu")
     Clear_terminal()
 
 def Input_absen(username):
@@ -229,7 +229,7 @@ while True:
         menu = input("  Pilih menu: ")
         match menu:
             case "1":
-                List_produk()
+                Daftar_produk()
             case "2":
                 Cari_produk()
             # case "3":
@@ -244,7 +244,7 @@ while True:
         menu = input("  Pilih menu: ")
         match menu:
             case "1":
-                List_produk()
+                Daftar_produk()
             case "2":
                 Cari_produk()
             # case "3":
