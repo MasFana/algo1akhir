@@ -91,4 +91,5 @@ def Absensi(username):
         print("> USER :",username)
         Input_absen(username)
         input("\nTekan enter untuk kembali ke menu")
+        Clear_terminal()
 Absensi('fana')
