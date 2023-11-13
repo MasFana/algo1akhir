@@ -229,8 +229,10 @@ while True:
         menu = input("  Pilih menu: ")
         match menu:
             case "1":
+                Clear_terminal()
                 Daftar_produk()
             case "2":
+                Clear_terminal()
                 Cari_produk()
             # case "3":
             #     Update_produk()
@@ -238,14 +240,18 @@ while True:
             #     Terima_dispatch()
             case "5":
                 Absensi(username)
+                Clear_terminal()
             case "6":
+                Clear_terminal()
                 break
     elif role == "admin":
         menu = input("  Pilih menu: ")
         match menu:
             case "1":
+                Clear_terminal()
                 Daftar_produk()
             case "2":
+                Clear_terminal()
                 Cari_produk()
             # case "3":
             #     Update_produk()
@@ -254,10 +260,12 @@ while True:
             # case "5":
             #     Histori()
             case "6":
+                Clear_terminal()
                 Absensi(username)
             # case "7":
             #     Dispatch()
             case "8":
+                Clear_terminal()
                 break
 
 
