@@ -69,7 +69,7 @@ def login():
             input("Tekan Enter Untuk Melanjutkan ")
             Clear_terminal()
 
-print(login())
+print(login()[0])
 
 
 

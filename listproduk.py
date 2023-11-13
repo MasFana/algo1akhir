@@ -8,8 +8,6 @@ def Clear_terminal():
     else:  
         subprocess.call('clear')
 
-pd.set_option('display.max_columns', None)
-pd.set_option('display.max_rows', None) 
 
 def List_produk():
     list =pd.read_csv("produk.csv")

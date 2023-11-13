@@ -1,4 +1,3 @@
-from ast import In
 import pandas as pd
 from tabulate import tabulate
 import time
@@ -10,9 +9,6 @@ def Clear_terminal():
         os.system('cls')
     else:  
         subprocess.call('clear')
-
-pd.set_option('display.max_columns', None)
-pd.set_option('display.max_rows', None) 
 
 def Input_absen(username):
     waktu = time.localtime()
