@@ -239,8 +239,8 @@ while True:
             # case "4":
             #     Terima_dispatch()
             case "5":
-                Absensi(username)
                 Clear_terminal()
+                Absensi(username)
             case "6":
                 Clear_terminal()
                 break
