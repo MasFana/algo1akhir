@@ -219,9 +219,38 @@ def Absensi(username):
         Input_absen(username)
         input("\nTekan enter untuk kembali ke menu")
         Clear_terminal()
-
-
-
+# Work In Progress ====================================================================================================
+def histori(mode,type,data):
+    df = pd.read_csv("histori.csv")
+    if mode == "tambah":
+        df = df.append(data,ignore_index=True)
+        df.to_csv("histori.csv",index=False)
+    elif mode == "cari":
+        if type == "produk":
+            df = df[df['type'].str.contains(data)]
+        elif type == "dispatch":
+            pass
+    elif mode == "tampilkan":
+        print(df)
+        print(f"Jumlah Data :",df.shape[0])
+    
+def Dispatch(user):
+    if user == "admin":
+        print("Admin Dispatch")
+        dfPegawai = pd.read_csv("users.csv")
+        dfProduk = pd.read_csv("produk.csv")
+        dfDispatch = pd.read_csv("dispatch.csv")
+        print(dfPegawai)
+        print("Pilih pegawai yang akan melakukan dispatch")
+        pegawai = input("Masukkan username pegawai: ")
+        print(dfProduk)
+def Mitra(user):
+    if user == "admin":
+        df = pd.read_csv("mitra.csv")
+        print(df)
+        print("")
+        
+# ======================================================================================================================    
 username,role = login()
 while True:
     Menu(username,role)
