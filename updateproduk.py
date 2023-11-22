@@ -19,7 +19,7 @@ def Update_produk():
     
 """
     print(list_teks)
-    print(list, headers='keys', tablefmt='psql'))
+    print(list, headers='keys', tablefmt='psql')
     
     input("Tekan enter untuk kembali ke menu")
     Clear_terminal()
