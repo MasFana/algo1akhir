@@ -40,8 +40,8 @@ def Mitra():
                 "nama":[nama],
                 "alamat":[alamat],
                 })
-            newMitra.to_csv("mitra.csv",mode ="a",index=False,header=False)
-            print("Mitra berhasil ditambahkan")
+                newMitra.to_csv("mitra.csv",mode ="a",index=False,header=False)
+                print("Mitra berhasil ditambahkan")
         case "2":
             print(mitra.to_string(index=False))
             id = input("Masukkan id mitra : ")
