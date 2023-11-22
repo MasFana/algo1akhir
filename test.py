@@ -1,4 +1,3 @@
-
 import pandas as pd
 import time
 # In Development =================================================================
@@ -36,14 +35,19 @@ def Mitra():
             newMitra.to_csv("mitra.csv",mode ="a",index=False,header=False)
             print("Mitra berhasil ditambahkan")
         case "2":
+            print(mitra.to_string(index=False))
             id = input("Masukkan id mitra : ")
             mitra = mitra[mitra['id'] != int(id)]
             mitra.to_csv("mitra.csv",index=False)
             print("Mitra berhasil dihapus")
             
         case "3":
+            print(mitra.to_string(index=False))
+            edit = input("Masukkan id mitra yang akan diedit : ")
+            mitra
             nama = input("Masukkan nama mitra : ")
             alamat = input("Masukkan alamat mitra : ")
+            print(mitra.to_string(index=False))
             mitra = mitra.append(pd.Series({
                 "nama":nama,
                 "alamat":alamat,
