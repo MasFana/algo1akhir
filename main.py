@@ -155,7 +155,7 @@ def Input_absen(username):
         'bulan':waktu.tm_mon,
         'tahun':waktu.tm_year}
     df = pd.DataFrame(waktu_dict,index=[0])
-    df.to_csv("absensi.csv",mode='a',header=False,index=False)
+    df.to_csv("absensi.csv",mode='a',header=False ,index=False)
  
 def Cari_absen(collum,data):
     df = pd.read_csv("absensi.csv")

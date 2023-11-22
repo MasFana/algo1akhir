@@ -1,5 +1,4 @@
 import pandas as pd
-from tabulate import tabulate
 import os
 import subprocess
 def Clear_terminal():
@@ -20,7 +19,7 @@ def Update_produk():
     
 """
     print(list_teks)
-    print(tabulate(list, headers='keys', tablefmt='psql'))
+    print(list, headers='keys', tablefmt='psql'))
     
     input("Tekan enter untuk kembali ke menu")
     Clear_terminal()
