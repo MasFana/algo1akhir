@@ -1,3 +1,4 @@
+from distutils.command import clean
 import pandas as pd
 import os
 import subprocess
@@ -101,7 +102,8 @@ def Menu(user="",role="pegawai"):
         print("║│  5. Histori                    │║")
         print("║│  6. Absensi pegawai            │║")
         print("║│  7. Dispatch                   │║")
-        print("║│  8. Keluar                     │║")
+        print("║│  8. Mitra                      │║")
+        print("║│  9. Keluar                     │║")
         print("║├────────────────────────────────┤║")
         print("║│            Menu Admin          │║")
         print("║└────────────────────────────────┘║")
@@ -253,6 +255,8 @@ def Mitra():
                 })
                 newMitra.to_csv("mitra.csv",mode ="a",index=False,header=False)
                 print("Mitra berhasil ditambahkan")
+                input("Tekan enter untuk kembali ke menu")
+                Clear_terminal()
             else:   
                 newMitra = pd.DataFrame({
                 "id":[mitra.iloc[-1]["id"]+1],
@@ -261,13 +265,16 @@ def Mitra():
                 })
                 newMitra.to_csv("mitra.csv",mode ="a",index=False,header=False)
                 print("Mitra berhasil ditambahkan")
+                input("Tekan enter untuk kembali ke menu")
+                Clear_terminal()
         case "2":
             print(mitra.to_string(index=False))
             id = input("Masukkan id mitra : ")
             mitra = mitra[mitra['id'] != int(id)]
             mitra.to_csv("mitra.csv",index=False)
             print("Mitra berhasil dihapus")
-            
+            input("Tekan enter untuk kembali ke menu")
+            Clear_terminal()            
         case "3":
             print(mitra.to_string(index=False))
             edit = input("Masukkan id mitra yang akan diedit : ")
@@ -281,6 +288,8 @@ def Mitra():
             }),ignore_index=True)
             mitra.to_csv("mitra.csv",index=False)
             print("Mitra berhasil diedit")
+            input("Tekan enter untuk kembali ke menu")
+            Clear_terminal()
             
 def Dispatch(user):
     dfPegawai = pd.read_csv("users.csv")
@@ -288,15 +297,17 @@ def Dispatch(user):
     username = dfPegawai[dfPegawai['username'] == user]['username'].values[0]
     
     if userole == "pegawai":
-        print("Pegawai Dispatch")
+        print("Pegawai Dispatch\n")
         dfDispatch = pd.read_csv("dispatch.csv")
         dfDispatch = dfDispatch[dfDispatch['status'] == "proses"]
         print(dfDispatch[dfDispatch['id_pegawai'] == username].to_string(index=False))
         id_dispatch = input("Masukkan id dispatch yang sudah selesai : ")
         dfDispatch.loc[dfDispatch['id'] == int(id_dispatch),'status'] = "selesai"
+        input("Tekan enter untuk kembali ke menu")
+        Clear_terminal()
         
     if userole == "admin":
-        print("Admin Dispatch")
+        print("Admin Dispatch\n")
         dfProduk = pd.read_csv("produk.csv")
         dfDispatch = pd.read_csv("dispatch.csv")
         dfMitra = pd.read_csv("mitra.csv")
@@ -305,6 +316,8 @@ def Dispatch(user):
         jumlah = input("Masukkan jumlah produk yang akan didispatch : ")
         if dfProduk[dfProduk['id'] == int(id_produk)]['stok'].values[0] < int(jumlah):
             print("Stok tidak mencukupi")
+            input("Tekan enter untuk kembali ke menu")
+            Clear_terminal()
             return
         else:
             dfProduk.loc[dfProduk['id'] == int(id_produk),'stok'] = dfProduk[dfProduk['id'] == int(id_produk)]['stok'] - int(jumlah)
@@ -341,7 +354,8 @@ def Dispatch(user):
         dispatch = dfDispatch._append(DispatchDict,ignore_index=True)
         dispatch.to_csv("dispatch.csv",index=False)
         dfProduk.to_csv("produk.csv",index=False)
-    
+        input("Tekan enter untuk kembali ke menu")
+        Clear_terminal()
 # ======================================================================================================================    
 username,role = login()
 while True:
@@ -386,6 +400,9 @@ while True:
             case "7":
                 Dispatch(username)
             case "8":
+                Mitra()
+                Clear_terminal()
+            case _:
                 Clear_terminal()
                 break
 
