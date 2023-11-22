@@ -1,6 +1,4 @@
 
-import dis
-from operator import index
 import pandas as pd
 import time
 # In Development =================================================================
@@ -19,7 +17,7 @@ def histori(mode,type,detail):
         print(f"Jumlah Data :",df.shape[0])
     
 # ================================================================================
-def Mitra(user): 
+def Mitra(): 
     mitra = pd.read_csv("mitra.csv")
     print(mitra.to_string(index=False) + "\n")
     print("1. Tambah Mitra")
@@ -30,31 +28,25 @@ def Mitra(user):
         case "1":
             nama = input("Masukkan nama mitra : ")
             alamat = input("Masukkan alamat mitra : ")
-            no_telp = input("Masukkan nomor telepon mitra : ")
-            mitra = mitra.append(pd.Series({
-                "id":mitra.shape[0]+1,
-                "nama":nama,
-                "alamat":alamat,
-                "no_telp":no_telp
-            }),ignore_index=True)
-            mitra.to_csv("mitra.csv",index=False)
+            newMitra = pd.DataFrame({
+                "id":[mitra.shape[0]+1],
+                "nama":[nama],
+                "alamat":[alamat],
+            })
+            newMitra.to_csv("mitra.csv",mode ="a",index=False,header=False)
             print("Mitra berhasil ditambahkan")
         case "2":
             id = input("Masukkan id mitra : ")
             mitra = mitra[mitra['id'] != int(id)]
             mitra.to_csv("mitra.csv",index=False)
             print("Mitra berhasil dihapus")
+            
         case "3":
-            id = input("Masukkan id mitra : ")
             nama = input("Masukkan nama mitra : ")
             alamat = input("Masukkan alamat mitra : ")
-            no_telp = input("Masukkan nomor telepon mitra : ")
-            mitra = mitra[mitra['id'] != int(id)]
             mitra = mitra.append(pd.Series({
-                "id":id,
                 "nama":nama,
                 "alamat":alamat,
-                "no_telp":no_telp
             }),ignore_index=True)
             mitra.to_csv("mitra.csv",index=False)
             print("Mitra berhasil diedit")
@@ -64,7 +56,12 @@ def Dispatch(user):
     userole = dfPegawai[dfPegawai['username'] == user]['role'].values[0]
     username = dfPegawai[dfPegawai['username'] == user]['username'].values[0]
     if userole == "pegawai":
-        pass
+        print("Pegawai Dispatch")
+        dfDispatch = pd.read_csv("dispatch.csv")
+        print(dfDispatch[dfDispatch['id_pegawai'] == username].to_string(index=False))
+        id_dispatch = input("Masukkan id dispatch yang sudah selesai : ")
+        dfDispatch.loc[dfDispatch['id'] == int(id_dispatch),'status'] = "selesai"
+        
     if userole == "admin":
         print("Admin Dispatch")
         dfProduk = pd.read_csv("produk.csv")
@@ -86,11 +83,10 @@ def Dispatch(user):
             "jumlah":jumlah,
             "tanggal":time.strftime("%d/%m/%Y"),
             "jam":time.strftime("%H:%M:%S"),
-            "status":"process"
+            "status":"proses"
         })
         print(DispatchDict)
         dispatch = dfDispatch._append(DispatchDict,ignore_index=True)
         dispatch.to_csv("dispatch.csv",index=False)
         
-    
-Dispatch("admin")
+Mitra()
