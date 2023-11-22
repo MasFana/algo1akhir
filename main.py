@@ -372,6 +372,7 @@ while True:
             # case "3":
             #     Update_produk()
             case "4":
+                Clear_terminal()
                 Dispatch(username)
             case "5":
                 Clear_terminal()
@@ -398,10 +399,11 @@ while True:
                 Clear_terminal()
                 Absensi(username)
             case "7":
+                Clear_terminal()
                 Dispatch(username)
             case "8":
-                Mitra()
                 Clear_terminal()
+                Mitra()
             case _:
                 Clear_terminal()
                 break
