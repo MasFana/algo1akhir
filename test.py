@@ -27,11 +27,19 @@ def Mitra():
         case "1":
             nama = input("Masukkan nama mitra : ")
             alamat = input("Masukkan alamat mitra : ")
-            newMitra = pd.DataFrame({
+            if mitra.shape[0] == 0:
+                newMitra = pd.DataFrame({
+                    "id":[1],
+                    "nama":[nama],
+                    "alamat":[alamat],
+                })
+                newMitra.to_csv("mitra.csv",mode ="a",index=False,header=False)
+            else:   
+                newMitra = pd.DataFrame({
                 "id":[mitra.iloc[-1]["id"]+1],
                 "nama":[nama],
                 "alamat":[alamat],
-            })
+                })
             newMitra.to_csv("mitra.csv",mode ="a",index=False,header=False)
             print("Mitra berhasil ditambahkan")
         case "2":
