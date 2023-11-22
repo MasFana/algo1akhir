@@ -1,2 +1,2 @@
-id,tanggal,jam,id_pegawai,id_mitra,id_barang,jumlah,status,id_produk,id_mitra.1
-1,22/11/2023 12:04:55,2,1,1,10,process,,
+id,id_pegawai,id_mitra,id_barang,jumlah,tanggal,jam,status
+

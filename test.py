@@ -28,7 +28,7 @@ def Mitra():
             nama = input("Masukkan nama mitra : ")
             alamat = input("Masukkan alamat mitra : ")
             newMitra = pd.DataFrame({
-                "id":[mitra.shape[0]+1],
+                "id":[mitra.iloc[-1]["id"]+1],
                 "nama":[nama],
                 "alamat":[alamat],
             })
@@ -74,23 +74,43 @@ def Dispatch(user):
         print(dfProduk.to_string(index=False))
         id_produk = input("Masukkan id produk yang akan didispatch : ")
         jumlah = input("Masukkan jumlah produk yang akan didispatch : ")
+        if dfProduk[dfProduk['id'] == int(id_produk)]['stok'].values[0] < int(jumlah):
+            print("Stok tidak mencukupi")
+            return
+        else:
+            dfProduk.loc[dfProduk['id'] == int(id_produk),'stok'] = dfProduk[dfProduk['id'] == int(id_produk)]['stok'] - int(jumlah)
+            
         print(dfMitra.to_string(index=False))
         mitra = input("Pilih mitra yang akan menerima dispatch (id) : ")
         print(dfPegawai[dfPegawai['role'] == "pegawai"][['id','username','role']].to_string(index=False))
         id_pegawai = input("Pilih pegawai yang akan melakukan dispatch (id) : ")
-        
-        DispatchDict = pd.Series({
-            "id":dfDispatch.shape[0]+1,
-            "id_pegawai":id_pegawai,
-            "id_mitra":mitra,    
-            "id_barang":id_produk,
-            "jumlah":jumlah,
-            "tanggal":time.strftime("%d/%m/%Y"),
-            "jam":time.strftime("%H:%M:%S"),
-            "status":"proses"
-        })
+        if dfDispatch.shape[0] == 0:
+            DispatchDict = pd.Series({
+                "id":1,
+                "id_pegawai":id_pegawai,
+                "id_mitra":mitra,    
+                "id_barang":id_produk,
+                "jumlah":jumlah,
+                "tanggal":time.strftime("%d/%m/%Y"),
+                "jam":time.strftime("%H:%M:%S"),
+                "status":"proses"
+            })
+            dispatch = pd.DataFrame(DispatchDict).T
+            dispatch.to_csv("dispatch.csv",index=False)
+        else:
+            DispatchDict = pd.Series({
+                "id":dfDispatch.iloc[-1]["id"]+1,
+                "id_pegawai":id_pegawai,
+                "id_mitra":mitra,    
+                "id_barang":id_produk,
+                "jumlah":jumlah,
+                "tanggal":time.strftime("%d/%m/%Y"),
+                "jam":time.strftime("%H:%M:%S"),
+                "status":"proses"
+            })
         print(DispatchDict)
         dispatch = dfDispatch._append(DispatchDict,ignore_index=True)
         dispatch.to_csv("dispatch.csv",index=False)
+        dfProduk.to_csv("produk.csv",index=False)
         
-Mitra()
+Dispatch("admin")
