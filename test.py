@@ -34,6 +34,7 @@ def Mitra():
                     "alamat":[alamat],
                 })
                 newMitra.to_csv("mitra.csv",mode ="a",index=False,header=False)
+                print("Mitra berhasil ditambahkan")
             else:   
                 newMitra = pd.DataFrame({
                 "id":[mitra.iloc[-1]["id"]+1],
