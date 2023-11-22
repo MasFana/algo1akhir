@@ -71,6 +71,7 @@ def Dispatch(user):
     if userole == "pegawai":
         print("Pegawai Dispatch")
         dfDispatch = pd.read_csv("dispatch.csv")
+        dfDispatch = dfDispatch[dfDispatch['status'] == "proses"]
         print(dfDispatch[dfDispatch['id_pegawai'] == username].to_string(index=False))
         id_dispatch = input("Masukkan id dispatch yang sudah selesai : ")
         dfDispatch.loc[dfDispatch['id'] == int(id_dispatch),'status'] = "selesai"
