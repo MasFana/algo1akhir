@@ -211,7 +211,7 @@ def Update_produk():
             pdProduk.to_csv("produk.csv",index=False)
             print("Produk berhasil diedit")
         case _:
-            Clear_terminal()
+            pass
     input("Tekan enter untuk kembali ke menu")  
     Clear_terminal()
         
