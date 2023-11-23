@@ -470,6 +470,25 @@ def Dispatch(user):
         dfProduk.to_csv("produk.csv",index=False)
         input("Tekan enter untuk kembali ke menu")
         Clear_terminal()
+def View_Dispatch():
+    dfDispatch = pd.read_csv("dispatch.csv")
+    dfProduk = pd.read_csv("produk.csv")
+    dfMitra = pd.read_csv("mitra.csv")
+    dfPegawai = pd.read_csv("users.csv")
+    dfDisplay = pd.DataFrame()
+    dfDisplay['id'] = dfDispatch['id']
+    dfDisplay['mitra'] = dfDispatch['id_mitra'].map(dfMitra.set_index('id')['nama'])
+    dfDisplay['alamat'] = dfDispatch['id_mitra'].map(dfMitra.set_index('id')['alamat'])
+    dfDisplay['produk'] = dfDispatch['id_barang'].map(dfProduk.set_index('id')['nama'])
+    dfDisplay['jumlah'] = dfDispatch['jumlah']
+    dfDisplay['tanggal'] = dfDispatch['tanggal']
+    dfDisplay['jam'] = dfDispatch['jam']
+    dfDisplay['status'] = dfDispatch['status']
+    dfDisplay['pegawai'] = dfDispatch['id_pegawai'].map(dfPegawai.set_index('id')['username'])
+    print(dfDisplay.to_string(index=False))
+    input("Tekan enter untuk kembali ke menu")
+    Clear_terminal()
+    
 # ======================================================================================================================    
 username,role = login()
 while True:
@@ -520,7 +539,17 @@ while True:
                 Absensi(username)
             case "7":
                 Clear_terminal()
-                Dispatch(username)
+                print("1. Lihat Dispatch")
+                print("2. Dispatch")
+                DisMenu = input("  Pilih menu: ")
+                match DisMenu:
+                    case "1":
+                        Clear_terminal()
+                        View_Dispatch()
+                        
+                    case "2":
+                        Clear_terminal()
+                        Dispatch(username)
             case "8":
                 Clear_terminal()
                 Mitra()
