@@ -99,8 +99,8 @@ def Menu(user="",role="pegawai"):
         print("║│  2. Cari Produk                │║")
         print("║│  3. Update Data Produk         │║")
         print("║│  4. Hapus Produk               │║")
-        print("║│  5. Histori                    │║")
-        print("║│  6. Absensi pegawai            │║")
+        print("║│  5. Absensi pegawai            │║")
+        print("║│  6. Histori Dispatch           │║")
         print("║│  7. Dispatch                   │║")
         print("║│  8. Mitra                      │║")
         print("║│  9. Keluar                     │║")
@@ -470,6 +470,7 @@ def Dispatch(user):
         dfProduk.to_csv("produk.csv",index=False)
         input("Tekan enter untuk kembali ke menu")
         Clear_terminal()
+        
 def View_Dispatch():
     dfDispatch = pd.read_csv("dispatch.csv")
     dfProduk = pd.read_csv("produk.csv")
@@ -485,9 +486,35 @@ def View_Dispatch():
     dfDisplay['jam'] = dfDispatch['jam']
     dfDisplay['status'] = dfDispatch['status']
     dfDisplay['pegawai'] = dfDispatch['id_pegawai'].map(dfPegawai.set_index('id')['username'])
-    print(dfDisplay.to_string(index=False))
-    input("Tekan enter untuk kembali ke menu")
+    print("Menu Histori Dispatch")
+    print("1. Tampilkan Dispatch Hari Ini")
+    print("2. Tampilkan Dispatch Bulan Ini")
+    print("3. Tampilkan Semua Dispatch")
+    print("4. Cari Dispatch Pegawai\n")
+    pilih = input("Pilih Menu : ")
     Clear_terminal()
+    match pilih:
+        case "1":
+            dfDisplay = dfDisplay[dfDisplay['tanggal'] == time.strftime("%d/%m/%Y")]
+            print(dfDisplay.to_string(index=False))
+            input("\nTekan enter untuk kembali ke menu")
+            Clear_terminal()
+        case "2":
+            dfDisplay = dfDisplay[dfDisplay['tanggal'].str.contains(time.strftime("%m/%Y"))]
+            print(dfDisplay.to_string(index=False))
+            input("\nTekan enter untuk kembali ke menu"   )
+            Clear_terminal()
+        case "3":
+            print(dfDisplay.to_string(index=False))
+            input("\nTekan enter untuk kembali ke menu")
+            Clear_terminal()
+        case "4":
+            dfDisplay = dfDisplay[dfDisplay['pegawai'].str.contains(input("Masukkan username pegawai : "))]
+            print(dfDisplay.to_string(index=False))
+            input("\nTekan enter untuk kembali ke menu")
+            Clear_terminal()
+        case _:
+            Clear_terminal()
     
 # ======================================================================================================================    
 username,role = login()
@@ -532,24 +559,15 @@ while True:
             case "4":
                 Clear_terminal()
                 Hapus_produk()
-            # case "5":
-            #     Histori()
-            case "6":
+            case "5":
                 Clear_terminal()
                 Absensi(username)
+            case "6":
+                Clear_terminal()
+                View_Dispatch()
             case "7":
                 Clear_terminal()
-                print("1. Lihat Dispatch")
-                print("2. Dispatch")
-                DisMenu = input("  Pilih menu: ")
-                match DisMenu:
-                    case "1":
-                        Clear_terminal()
-                        View_Dispatch()
-                        
-                    case "2":
-                        Clear_terminal()
-                        Dispatch(username)
+                Dispatch(username)
             case "8":
                 Clear_terminal()
                 Mitra()
