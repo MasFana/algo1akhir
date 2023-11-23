@@ -472,6 +472,16 @@ def Dispatch(user):
         Clear_terminal()
         
 def View_Dispatch():
+    ViewTeks = """
+
+  _    _ _     _             _   _____  _                 _       _     
+ | |  | (_)   | |           (_) |  __ \(_)               | |     | |    
+ | |__| |_ ___| |_ ___  _ __ _  | |  | |_ ___ _ __   __ _| |_ ___| |__  
+ |  __  | / __| __/ _ \| '__| | | |  | | / __| '_ \ / _` | __/ __| '_ \ 
+ | |  | | \__ \ || (_) | |  | | | |__| | \__ \ |_) | (_| | || (__| | | |
+ |_|  |_|_|___/\__\___/|_|  |_| |_____/|_|___/ .__/ \__,_|\__\___|_| |_|
+                                             | |                        
+                                             |_|"""
     dfDispatch = pd.read_csv("dispatch.csv")
     dfProduk = pd.read_csv("produk.csv")
     dfMitra = pd.read_csv("mitra.csv")
@@ -486,6 +496,7 @@ def View_Dispatch():
     dfDisplay['jam'] = dfDispatch['jam']
     dfDisplay['status'] = dfDispatch['status']
     dfDisplay['pegawai'] = dfDispatch['id_pegawai'].map(dfPegawai.set_index('id')['username'])
+    print(ViewTeks)
     print("Menu Histori Dispatch")
     print("1. Tampilkan Dispatch Hari Ini")
     print("2. Tampilkan Dispatch Bulan Ini")
