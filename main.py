@@ -484,6 +484,9 @@ while True:
             case "6":
                 Clear_terminal()
                 break
+            case _:
+                Clear_terminal()
+                break
     elif role == "admin":
         menu = input("  Pilih menu: ")
         match menu:
