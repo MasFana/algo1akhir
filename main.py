@@ -414,18 +414,25 @@ def Dispatch(user):
                                                 |_|"""
         print(adminDispatch)
         print(dfProduk.to_string(index=False))
-        id_produk = input("\nMasukkan id produk yang akan didispatch : ")
-        jumlah = input("Masukkan jumlah produk yang akan didispatch : ")
-        if dfProduk[dfProduk['id'] == int(id_produk)]['stok'].values[0] < int(jumlah):
-            print("Stok tidak mencukupi")
-            return
-        else:
-            dfProduk.loc[dfProduk['id'] == int(id_produk),'stok'] = dfProduk[dfProduk['id'] == int(id_produk)]['stok'] - int(jumlah)
-            
-        print(dfMitra.to_string(index=False))
-        mitra = input("Pilih mitra yang akan menerima dispatch (id) : ")
-        print(dfPegawai[dfPegawai['role'] == "pegawai"][['id','username','role']].to_string(index=False))
-        id_pegawai = input("Pilih pegawai yang akan melakukan dispatch (id) : ")
+        try:
+            id_produk = input("\nMasukkan id produk yang akan didispatch : ")
+            jumlah = input("Masukkan jumlah produk yang akan didispatch : ")
+            if dfProduk[dfProduk['id'] == int(id_produk)]['stok'].values[0] < int(jumlah):
+                print("Stok tidak mencukupi")
+                return
+            else:
+                dfProduk.loc[dfProduk['id'] == int(id_produk),'stok'] = dfProduk[dfProduk['id'] == int(id_produk)]['stok'] - int(jumlah)
+
+            print(dfMitra.to_string(index=False))
+            mitra = input("Pilih mitra yang akan menerima dispatch (id) : ")
+            print(dfPegawai[dfPegawai['role'] == "pegawai"][['id','username','role']].to_string(index=False))
+            id_pegawai = input("Pilih pegawai yang akan melakukan dispatch (id) : ")
+        except:
+            Clear_terminal()
+            print("Input tidak valid")
+            lanjut = input("Tekan enter untuk Lanjut / n untuk kembali ke menu")
+            if lanjut != "N":
+                Dispatch(user)
         if dfDispatch.shape[0] == 0:
             DispatchDict = pd.Series({
                 "id":1,
