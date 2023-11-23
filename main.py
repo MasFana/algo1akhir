@@ -473,8 +473,8 @@ while True:
             case "2":
                 Clear_terminal()
                 Cari_produk()
-            # case "3":
-            #     Update_produk()
+            case "3":
+                Update_produk()
             case "4":
                 Clear_terminal()
                 Dispatch(username)
