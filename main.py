@@ -123,7 +123,7 @@ def Cari_produk():
     cari = input("Masukkan nama produk yang ingin dicari: ")
     hasil = data[data['nama'].str.contains(cari, case=False, na=False)]
     if hasil.empty == False :
-        print(hasil)
+        print(hasil.to_string(index=False))
     else:
         print("\n<==> Produk tidak ditemukan <==>")
 
@@ -142,7 +142,7 @@ def Daftar_produk():
     
 """
     print(list_teks)
-    print(list)
+    print(list.to_string(index=False))
     
     input("\nTekan enter untuk kembali ke menu")
     Clear_terminal()
@@ -539,7 +539,7 @@ while True:
                 break
             case _:
                 Clear_terminal()
-                break
+                
     elif role == "admin":
         menu = input("  Pilih menu: ")
         match menu:
@@ -569,7 +569,7 @@ while True:
                 Mitra()
             case _:
                 Clear_terminal()
-                break
+                
 
 
 
