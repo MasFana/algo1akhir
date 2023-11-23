@@ -431,8 +431,10 @@ def Dispatch(user):
             Clear_terminal()
             print("Input tidak valid")
             lanjut = input("Tekan enter untuk Lanjut / n untuk kembali ke menu")
-            if lanjut != "N":
+            if lanjut != "n":
                 Dispatch(user)
+            else:
+                return
         if dfDispatch.shape[0] == 0:
             DispatchDict = pd.Series({
                 "id":1,
