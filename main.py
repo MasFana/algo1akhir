@@ -210,9 +210,13 @@ def Update_produk():
             pdProduk.loc[pdProduk['id'] == int(edit),['nama','harga',"stok"]] = [nama,harga,stok]
             pdProduk.to_csv("produk.csv",index=False)
             print("Produk berhasil diedit")
+        case _:
+            Clear_terminal()
     input("Tekan enter untuk kembali ke menu")  
     Clear_terminal()
-    
+        
+
+            
 def Hapus_produk():
     hapusteks ="""
 
