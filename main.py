@@ -474,6 +474,7 @@ while True:
                 Clear_terminal()
                 Cari_produk()
             case "3":
+                Clear_terminal()
                 Update_produk()
             case "4":
                 Clear_terminal()
