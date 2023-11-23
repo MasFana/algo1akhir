@@ -158,7 +158,83 @@ def Input_absen(username):
         'tahun':waktu.tm_year}
     df = pd.DataFrame(waktu_dict,index=[0])
     df.to_csv("absensi.csv",mode='a',header=False ,index=False)
- 
+
+def Update_produk():
+    pdProduk = pd.read_csv("produk.csv")    
+    list_teks ="""
+ _      _     _     _____               _       _    
+| |    (_)   | |   |  __ \             | |     | |   
+| |     _ ___| |_  | |__) | __ ___   __| |_   _| | __
+| |    | / __| __| |  ___/ '__/ _ \ / _` | | | | |/ /
+| |____| \__ \ |_  | |   | | | (_) | (_| | |_| |   < 
+|______|_|___/\__| |_|   |_|  \___/ \__,_|\__,_|_|\_\
+    
+"""
+    print(list_teks)
+    print(pdProduk.to_string(index=False))
+    print("")
+    print("1. Tambah Produk")
+    print("2. Edit Produk")    
+    pilih = input("Pilih Menu : ")
+    Clear_terminal()
+    match pilih:
+        case "1":
+            print(pdProduk.to_string(index=False))
+            nama = input("Masukkan nama produk : ")
+            harga = input("Masukkan harga produk : ")
+            stok = input("Masukkan stok produk : ")
+            if pdProduk.shape[0] == 0:
+                newProduk = pd.DataFrame({
+                    "id":[1],
+                    "nama":[nama],
+                    "harga":[harga],
+                    "stok":[stok],
+                })
+                newProduk.to_csv("produk.csv",mode ="a",index=False,header=False)
+                print("Produk berhasil ditambahkan")
+            else:   
+                newProduk = pd.DataFrame({
+                "id":[pdProduk.iloc[-1]["id"]+1],
+                "nama":[nama],
+                "harga":[harga],
+                "stok":[stok],
+                })
+                newProduk.to_csv("produk.csv",mode ="a",index=False,header=False)
+                print("Produk berhasil ditambahkan")
+        case "2":
+            print(pdProduk.to_string(index=False))
+            edit = int(input("Masukkan id produk yang akan diedit : "))
+            nama = input("Masukkan nama produk : ")
+            harga = int(input("Masukkan harga produk : "))
+            stok = int(input("Masukkan stok produk : "))
+            pdProduk.loc[pdProduk['id'] == int(edit),['nama','harga',"stok"]] = [nama,harga,stok]
+            pdProduk.to_csv("produk.csv",index=False)
+            print("Produk berhasil diedit")
+    input("Tekan enter untuk kembali ke menu")  
+    Clear_terminal()
+    
+def Hapus_produk():
+    hapusteks ="""
+
+  _    _                         _____               _       _    
+ | |  | |                       |  __ \             | |     | |   
+ | |__| | __ _ _ __  _   _ ___  | |__) | __ ___   __| |_   _| | __
+ |  __  |/ _` | '_ \| | | / __| |  ___/ '__/ _ \ / _` | | | | |/ /
+ | |  | | (_| | |_) | |_| \__ \ | |   | | | (_) | (_| | |_| |   < 
+ |_|  |_|\__,_| .__/ \__,_|___/ |_|   |_|  \___/ \__,_|\__,_|_|\_\
+              | |                                                 
+              |_|"""
+    print(hapusteks)
+    pdProduk = pd.read_csv("produk.csv")    
+    print(pdProduk.to_string(index=False))
+    print("")
+    hapus = input("Pilih produk yang akan dihapus (id)")
+    pdProduk = pdProduk[pdProduk['id'] != int(hapus)]
+    pdProduk.to_csv("produk.csv",index=False)
+    print("Produk berhasil dihapus")
+    input("Tekan enter untuk kembali ke menu")
+    Clear_terminal()
+    
 def Cari_absen(collum,data):
     df = pd.read_csv("absensi.csv")
     if collum == "bulan" or collum == "tahun" or collum == "tanggal":
@@ -168,6 +244,7 @@ def Cari_absen(collum,data):
     print(df)
     print(f"Jumlah Data {data} :",df.shape[0])
     
+
 def Absensi(username):
     usertype = pd.read_csv("users.csv")
     role = usertype[usertype['username'] == username]['role'].values[0]
@@ -235,7 +312,7 @@ def histori(mode,type,data):
     elif mode == "tampilkan":
         print(df)
         print(f"Jumlah Data :",df.shape[0])
-    
+# ======================================================================================================================
 def Mitra(): 
     mitra = pd.read_csv("mitra.csv")
     print(mitra.to_string(index=False) + "\n")
@@ -255,8 +332,6 @@ def Mitra():
                 })
                 newMitra.to_csv("mitra.csv",mode ="a",index=False,header=False)
                 print("Mitra berhasil ditambahkan")
-                input("Tekan enter untuk kembali ke menu")
-                Clear_terminal()
             else:   
                 newMitra = pd.DataFrame({
                 "id":[mitra.iloc[-1]["id"]+1],
@@ -265,16 +340,13 @@ def Mitra():
                 })
                 newMitra.to_csv("mitra.csv",mode ="a",index=False,header=False)
                 print("Mitra berhasil ditambahkan")
-                input("Tekan enter untuk kembali ke menu")
-                Clear_terminal()
         case "2":
             print(mitra.to_string(index=False))
             id = input("Masukkan id mitra : ")
             mitra = mitra[mitra['id'] != int(id)]
             mitra.to_csv("mitra.csv",index=False)
             print("Mitra berhasil dihapus")
-            input("Tekan enter untuk kembali ke menu")
-            Clear_terminal()            
+            
         case "3":
             print(mitra.to_string(index=False))
             edit = input("Masukkan id mitra yang akan diedit : ")
@@ -288,36 +360,68 @@ def Mitra():
             }),ignore_index=True)
             mitra.to_csv("mitra.csv",index=False)
             print("Mitra berhasil diedit")
-            input("Tekan enter untuk kembali ke menu")
-            Clear_terminal()
             
+
 def Dispatch(user):
     dfPegawai = pd.read_csv("users.csv")
     userole = dfPegawai[dfPegawai['username'] == user]['role'].values[0]
     username = dfPegawai[dfPegawai['username'] == user]['username'].values[0]
-    
+    idPegawai= dfPegawai[dfPegawai['username'] == user]['id'].values[0]
+    dfProduk = pd.read_csv("produk.csv")
+    dfDispatch = pd.read_csv("dispatch.csv")
+    dfMitra = pd.read_csv("mitra.csv")
     if userole == "pegawai":
-        print("Pegawai Dispatch\n")
+        pegawaiDispatch = """
+  ____  _                 _       _     
+ |  _ \(_)___ _ __   __ _| |_ ___| |__  
+ | | | | / __| '_ \ / _` | __/ __| '_ \ 
+ | |_| | \__ \ |_) | (_| | || (__| | | |
+ |____/|_|___/ .__/ \__,_|\__\___|_| |_|
+             |_|                       
+"""
+        print(pegawaiDispatch)
         dfDispatch = pd.read_csv("dispatch.csv")
         dfDispatch = dfDispatch[dfDispatch['status'] == "proses"]
-        print(dfDispatch[dfDispatch['id_pegawai'] == username].to_string(index=False))
-        id_dispatch = input("Masukkan id dispatch yang sudah selesai : ")
-        dfDispatch.loc[dfDispatch['id'] == int(id_dispatch),'status'] = "selesai"
-        input("Tekan enter untuk kembali ke menu")
-        Clear_terminal()
-        
+        dfDispatch = dfDispatch[dfDispatch['id_pegawai'] == idPegawai]
+        dfDisplay = pd.DataFrame()
+        dfDisplay['id'] = dfDispatch['id']
+        dfDisplay['mitra'] = dfDispatch['id_mitra'].map(dfMitra.set_index('id')['nama'])
+        dfDisplay['alamat'] = dfDispatch['id_mitra'].map(dfMitra.set_index('id')['alamat'])
+        dfDisplay['produk'] = dfDispatch['id_barang'].map(dfProduk.set_index('id')['nama'])
+        dfDisplay['jumlah'] = dfDispatch['jumlah']
+        dfDisplay['tanggal'] = dfDispatch['tanggal']
+        dfDisplay['jam'] = dfDispatch['jam']
+        dfDisplay['status'] = dfDispatch['status']
+        if dfDisplay.shape[0] == 0:
+            print("Tidak ada dispatch yang perlu diselesaikan")
+            input("Tekan enter untuk kembali ke menu")
+            Clear_terminal()
+            return
+        else:
+            print(dfDisplay.to_string(index=False))
+            id_dispatch = input("\nMasukkan id dispatch yang sudah selesai : ")
+            input("Tekan enter untuk kembali ke menu")
+            dfDispatch.loc[dfDispatch['id'] == int(id_dispatch),'status'] = "selesai"
+            dfDispatch.to_csv("dispatch.csv",index=False)
+            input("Tekan enter untuk kembali ke menu")
+            Clear_terminal()
+
     if userole == "admin":
-        print("Admin Dispatch\n")
-        dfProduk = pd.read_csv("produk.csv")
-        dfDispatch = pd.read_csv("dispatch.csv")
-        dfMitra = pd.read_csv("mitra.csv")
+        adminDispatch = """
+              _           _         _____  _                 _       _     
+     /\      | |         (_)       |  __ \(_)               | |     | |    
+    /  \   __| |_ __ ___  _ _ __   | |  | |_ ___ _ __   __ _| |_ ___| |__  
+   / /\ \ / _` | '_ ` _ \| | '_ \  | |  | | / __| '_ \ / _` | __/ __| '_ \ 
+  / ____ \ (_| | | | | | | | | | | | |__| | \__ \ |_) | (_| | || (__| | | |
+ /_/    \_\__,_|_| |_| |_|_|_| |_| |_____/|_|___/ .__/ \__,_|\__\___|_| |_|
+                                                | |                        
+                                                |_|"""
+        print(adminDispatch)
         print(dfProduk.to_string(index=False))
-        id_produk = input("Masukkan id produk yang akan didispatch : ")
+        id_produk = input("\nMasukkan id produk yang akan didispatch : ")
         jumlah = input("Masukkan jumlah produk yang akan didispatch : ")
         if dfProduk[dfProduk['id'] == int(id_produk)]['stok'].values[0] < int(jumlah):
             print("Stok tidak mencukupi")
-            input("Tekan enter untuk kembali ke menu")
-            Clear_terminal()
             return
         else:
             dfProduk.loc[dfProduk['id'] == int(id_produk),'stok'] = dfProduk[dfProduk['id'] == int(id_produk)]['stok'] - int(jumlah)
@@ -389,10 +493,12 @@ while True:
             case "2":
                 Clear_terminal()
                 Cari_produk()
-            # case "3":
-            #     Update_produk()
-            # case "4":
-            #     Hapus_produk()
+            case "3":
+                Clear_terminal()
+                Update_produk()
+            case "4":
+                Clear_terminal()
+                Hapus_produk()
             # case "5":
             #     Histori()
             case "6":
