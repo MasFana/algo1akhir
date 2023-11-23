@@ -201,19 +201,28 @@ def Update_produk():
                 })
                 newProduk.to_csv("produk.csv",mode ="a",index=False,header=False)
                 print("Produk berhasil ditambahkan")
+            input("Tekan enter untuk kembali ke menu")  
+            Clear_terminal()
         case "2":
             print(pdProduk.to_string(index=False))
-            edit = int(input("Masukkan id produk yang akan diedit : "))
-            nama = input("Masukkan nama produk : ")
-            harga = int(input("Masukkan harga produk : "))
-            stok = int(input("Masukkan stok produk : "))
-            pdProduk.loc[pdProduk['id'] == int(edit),['nama','harga',"stok"]] = [nama,harga,stok]
-            pdProduk.to_csv("produk.csv",index=False)
-            print("Produk berhasil diedit")
+            try:
+                edit = int(input("Masukkan id produk yang akan diedit : "))
+                nama = input("Masukkan nama produk : ")
+                harga = int(input("Masukkan harga produk : "))
+                stok = int(input("Masukkan stok produk : "))
+                pdProduk.loc[pdProduk['id'] == int(edit),['nama','harga',"stok"]] = [nama,harga,stok]
+                pdProduk.to_csv("produk.csv",index=False)
+                print("Produk berhasil diedit")
+            except:
+                print("Input tidak valid")
+                lanjut = input("Tekan enter untuk Lanjut / ketik n untuk kembali ke menu : ")
+                if lanjut != "n":
+                    Update_produk()
+                else:
+                    return
         case _:
-            pass
-    input("Tekan enter untuk kembali ke menu")  
-    Clear_terminal()
+            return
+
         
 
             
@@ -434,7 +443,7 @@ def Dispatch(user):
         except:
             Clear_terminal()
             print("Input tidak valid")
-            lanjut = input("Tekan enter untuk Lanjut / n untuk kembali ke menu")
+            lanjut = input("Tekan enter untuk Lanjut / ketik n untuk kembali ke menu : ")
             if lanjut != "n":
                 Dispatch(user)
             else:

@@ -1,3 +1,5 @@
 id,username,password,role
 1,admin,fana,admin
 2,fana,fana,pegawai
+3,yuna,yuna,pegawai
+4,rifi,rifi,pegawai
