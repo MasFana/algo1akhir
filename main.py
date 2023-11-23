@@ -298,21 +298,7 @@ def Absensi(username):
         Input_absen(username)
         input("\nTekan enter untuk kembali ke menu")
         Clear_terminal()
-# Work In Progress ====================================================================================================
-def histori(mode,type,data):
-    df = pd.read_csv("histori.csv")
-    if mode == "tambah":
-        df = df.append(data,ignore_index=True)
-        df.to_csv("histori.csv",index=False)
-    elif mode == "cari":
-        if type == "produk":
-            df = df[df['type'].str.contains(data)]
-        elif type == "dispatch":
-            pass
-    elif mode == "tampilkan":
-        print(df)
-        print(f"Jumlah Data :",df.shape[0])
-# ======================================================================================================================
+
 def Mitra(): 
     teksmitra = """
 
