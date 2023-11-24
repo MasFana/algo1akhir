@@ -364,6 +364,7 @@ def Mitra():
             mitra.to_csv("mitra.csv",index=False)
             print("Mitra berhasil diedit")
         case _:
+            Clear_terminal()
             return
     input("Tekan enter untuk kembali ke menu")
     Clear_terminal()
