@@ -410,8 +410,8 @@ def Dispatch(user):
             input("Tekan enter untuk kembali ke menu")
             dfDispatch.loc[dfDispatch['id'] == int(id_dispatch),'status'] = "selesai"
             dfDispatch.to_csv("dispatch.csv",index=False)
-            input("Tekan enter untuk kembali ke menu")
             Clear_terminal()
+            return
 
     if userole == "admin":
         adminDispatch = """
