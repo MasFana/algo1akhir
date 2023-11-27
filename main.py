@@ -440,6 +440,7 @@ def Dispatch(user):
             jumlah = input("Masukkan jumlah produk yang akan didispatch : ")
             if dfProduk[dfProduk['id'] == int(id_produk)]['stok'].values[0] < int(jumlah):
                 print("Stok tidak mencukupi")
+                input("Tekan enter untuk kembali ke menu")
                 return
             else:
                 dfProduk.loc[dfProduk['id'] == int(id_produk),'stok'] = dfProduk[dfProduk['id'] == int(id_produk)]['stok'] - int(jumlah)
