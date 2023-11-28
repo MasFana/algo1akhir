@@ -119,8 +119,11 @@ def Cari_produk():
 """
     print(cari_text)
     data =pd.read_csv("produk.csv")
+    data = data[data["view"]==1]
+    data = data.drop(columns=["view"])
     cari = input("Masukkan nama produk yang ingin dicari: ")
     hasil = data[data['nama'].str.contains(cari, case=False, na=False)]
+    
     if hasil.empty == False :
         print(hasil.to_string(index=False))
     else:
@@ -169,7 +172,7 @@ def Input_absen(username):
 def Update_produk():
     pdProduk = pd.read_csv("produk.csv")
     pdProduk = pdProduk[pdProduk["view"]==1]  
-    pdProduk.drop(columns=["view"])
+    pdProduk = pdProduk.drop(columns=["view"],)
     list_teks ="""
   _    _           _       _       _____               _       _    
  | |  | |         | |     | |     |  __ \             | |     | |   
@@ -262,7 +265,7 @@ def Hapus_produk():
     print(hapusteks)
     pdProduk = pd.read_csv("produk.csv")    
     pdProduk = pdProduk[pdProduk["view"]==1]
-    pdProduk.drop(columns=["view"])
+    pdProduk = pdProduk.drop(columns=["view"])
     print(pdProduk.to_string(index=False))
     print("")
     hapus = input("Pilih produk yang akan dihapus (id)")
@@ -416,6 +419,8 @@ def Dispatch(user):
     username = dfPegawai[dfPegawai['username'] == user]['username'].values[0]
     idPegawai= dfPegawai[dfPegawai['username'] == user]['id'].values[0]
     dfProduk = pd.read_csv("produk.csv")
+    dfProduk = dfProduk[dfProduk["view"]==1]
+    dfProduk = dfProduk.drop(columns=["view"])
     dfDispatch = pd.read_csv("dispatch.csv")
     dfMitra = pd.read_csv("mitra.csv")
     if userole == "pegawai":
@@ -468,6 +473,9 @@ def Dispatch(user):
         print(dfProduk.to_string(index=False))
         try:
             id_produk = input("\nMasukkan id produk yang akan didispatch : ")
+            if id_produk.isdigit() == False:
+                Clear_terminal()
+                return
             jumlah = input("Masukkan jumlah produk yang akan didispatch : ")
             if dfProduk[dfProduk['id'] == int(id_produk)]['stok'].values[0] < int(jumlah):
                 print("Stok tidak mencukupi")
