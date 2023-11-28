@@ -172,7 +172,7 @@ def Input_absen(username):
 def Update_produk():
     pdProduk = pd.read_csv("produk.csv")
     pdProduk = pdProduk[pdProduk["view"]==1]  
-    pdProduk = pdProduk.drop(columns=["view"],)
+    pdview = pdProduk.drop(columns=["view"],)
     list_teks ="""
   _    _           _       _       _____               _       _    
  | |  | |         | |     | |     |  __ \             | |     | |   
@@ -184,7 +184,7 @@ def Update_produk():
         |_|                                                                                                                                                                               
 """
     print(list_teks)
-    print(pdProduk.to_string(index=False))
+    print(pdview.to_string(index=False))
     print("")
     print(" [1] Tambah Produk")
     print(" [2] Edit Produk\n")    
@@ -267,8 +267,8 @@ def Hapus_produk():
     print(hapusteks)
     pdProduk = pd.read_csv("produk.csv")    
     pdProduk = pdProduk[pdProduk["view"]==1]
-    pdProduk = pdProduk.drop(columns=["view"])
-    print(pdProduk.to_string(index=False))
+    pdview = pdProduk.drop(columns=["view"])
+    print(pdview.to_string(index=False))
     print("")
     hapus = input("Pilih produk yang akan dihapus (id)")
     if hapus.isdigit() == False:
