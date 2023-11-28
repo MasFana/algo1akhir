@@ -214,6 +214,7 @@ def Update_produk():
                     "nama":[nama],
                     "harga":[harga],
                     "stok":[stok],
+                    "view":[1],
                 })
                 newProduk.to_csv("produk.csv",mode ="a",index=False,header=False)
                 print("Produk berhasil ditambahkan")
@@ -223,6 +224,7 @@ def Update_produk():
                 "nama":[nama],
                 "harga":[harga],
                 "stok":[stok],
+                "view":[1],
                 })
                 newProduk.to_csv("produk.csv",mode ="a",index=False,header=False)
                 print("Produk berhasil ditambahkan")
