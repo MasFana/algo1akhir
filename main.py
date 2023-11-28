@@ -1,7 +1,6 @@
 import pandas as pd
 import os
 import subprocess
-import csv
 import time
 
 def Clear_terminal():
@@ -168,7 +167,9 @@ def Input_absen(username):
         print(f"Anda sudah absen pada {absenow['jam'].to_string(index=False)}")
 
 def Update_produk():
-    pdProduk = pd.read_csv("produk.csv")    
+    pdProduk = pd.read_csv("produk.csv")
+    pdProduk = pdProduk[pdProduk["view"]==1]  
+    pdProduk.drop(columns=["view"])
     list_teks ="""
   _    _           _       _       _____               _       _    
  | |  | |         | |     | |     |  __ \             | |     | |   
@@ -182,14 +183,26 @@ def Update_produk():
     print(list_teks)
     print(pdProduk.to_string(index=False))
     print("")
-    print("1. Tambah Produk")
-    print("2. Edit Produk")    
+    print(" [1] Tambah Produk")
+    print(" [2] Edit Produk\n")    
     pilih = input("Pilih Menu : ")
     Clear_terminal()
     match pilih:
         case "1":
-            print(pdProduk.to_string(index=False))
+            namapd = list(pdProduk["nama"])
             nama = input("Masukkan nama produk : ")
+            if nama in namapd or nama == "":
+                if nama in namapd:
+                    print("Nama produk sudah ada !!")
+                elif nama =="":
+                    print("Nama produk tidak boleh kosong !! ")
+                keluar = input("Tekan enter untuk melanjutkan / n untuk keluar ke menu")
+                if keluar == "n":
+                    Clear_terminal()
+                    return
+                else:
+                    Update_produk()
+                    
             harga = input("Masukkan harga produk : ")
             stok = input("Masukkan stok produk : ")
             if pdProduk.shape[0] == 0:
@@ -248,10 +261,17 @@ def Hapus_produk():
               |_|"""
     print(hapusteks)
     pdProduk = pd.read_csv("produk.csv")    
+    pdProduk = pdProduk[pdProduk["view"]==1]
+    pdProduk.drop(columns=["view"])
     print(pdProduk.to_string(index=False))
     print("")
     hapus = input("Pilih produk yang akan dihapus (id)")
-    pdProduk = pdProduk[pdProduk['id'] != int(hapus)]
+    if hapus.isdigit() == False:
+        print("Input tidak valid")
+        input("Tekan enter untuk kembali ke menu")
+        Clear_terminal()
+        return
+    pdProduk.loc[pdProduk["id"]==int(hapus),["view"]] = 0
     pdProduk.to_csv("produk.csv",index=False)
     print("Produk berhasil dihapus")
     input("Tekan enter untuk kembali ke menu")
@@ -262,9 +282,20 @@ def Cari_absen(collum,data):
     if collum == "bulan" or collum == "tahun" or collum == "tanggal":
         df = df[df[collum] == int(data)]
     else:
-        df = df[df[collum].str.contains(data)]
-    print(df)
-    print(f"Jumlah Data {data} :",df.shape[0])
+        df = df[df[collum].str.contains(data,case=False)]
+    if df.empty:
+        print("\n  Data Kosong")
+        return
+    print(df.to_string(index=False))
+    if collum=="bulan":
+        keterangan = "bulan "
+    if collum=="tahun":
+        keterangan = "tahun "
+    if collum=="tanggal":
+        keterangan = "tanggal "
+    else:
+        keterangan = ""
+    print(f"Jumlah Data {keterangan}{data} :",df.shape[0])
     
 
 def Absensi(username):
@@ -537,7 +568,7 @@ def View_Dispatch():
             input("\nTekan enter untuk kembali ke menu")
             Clear_terminal()
         case "4":
-            dfDisplay = dfDisplay[dfDisplay['pegawai'].str.contains(input("Masukkan username pegawai : "))]
+            dfDisplay = dfDisplay[dfDisplay['pegawai'].str.contains(input("Masukkan username pegawai : "),case=False)]
             print(dfDisplay.to_string(index=False))
             input("\nTekan enter untuk kembali ke menu")
             Clear_terminal()

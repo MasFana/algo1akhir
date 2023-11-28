@@ -1,4 +1,4 @@
-id,nama,harga,stok
-1,kedelai,10,10
-2,kacang,10000,0
-3,kaori,1000,1000
+id,nama,harga,stok,view
+1,kedelai,10,10,0
+2,kacang,10000,0,1
+3,kaori,1000,1000,1
