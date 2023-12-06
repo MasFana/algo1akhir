@@ -1,4 +1,9 @@
+# TaniToriPro
+Manajemen Inventaris Gudang Pertanian 
+
 # Tugas Akhir Algoritma 1 Kelas E Universitas Jember
+
+
 # Adrian Fathan Imama
 (232410103047)
 # Rezha Amanda Rohima
