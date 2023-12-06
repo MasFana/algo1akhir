@@ -3,7 +3,6 @@ Manajemen Inventaris Gudang Pertanian
 
 # Tugas Akhir Algoritma 1 Kelas E Universitas Jember
 
-
 # Adrian Fathan Imama
 (232410103047)
 # Rezha Amanda Rohima
@@ -15,4 +14,5 @@ Manajemen Inventaris Gudang Pertanian
 # Sefiand Neeza Efendy
 (232410103085)
 
+Before start run pip -m install requirements.txt
 ~ 2023-2024
