@@ -1,4 +1,3 @@
-# algo1akhir
 # Tugas Akhir Algoritma 1 Kelas E Universitas Jember
 # Adrian Fathan Imama
 (232410103047)
@@ -11,3 +10,4 @@
 # Sefiand Neeza Efendy
 (232410103085)
 
+~ 2023-2024
