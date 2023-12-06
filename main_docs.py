@@ -2,17 +2,18 @@ import pandas as pd
 import os
 import subprocess
 import time
-
+# Function ntuk membersihkan terminal
 def Clear_terminal():
     if os.name == 'nt':
         os.system('cls')
     else:  
         subprocess.call('clear')
+# Function untuk menampilkan waktu dan tanggal saat ini dalam bentuk dictionary
 def Jam():
     waktu = time.localtime()
     waktu_dict = {'jam':time.strftime("%H:%M:%S",waktu) ,'tanggal':waktu.tm_mday, 'bulan':waktu.tm_mon, 'tahun':waktu.tm_year}
     return waktu_dict
-
+# Function untuk login dan mengecek role user yang login apakah admin atau pegawai
 def login():
     login_text = """                                            
  _                 _       
@@ -73,7 +74,7 @@ def login():
             print(username_text)
             input("Tekan Enter Untuk Melanjutkan ")
             Clear_terminal()
-
+# Function untuk menampilkan menu sesuai role user yang login
 def Menu(user="",role="pegawai"):
     print(
 """
@@ -106,7 +107,7 @@ def Menu(user="",role="pegawai"):
         print("║│            Menu Admin          │║")
         print("║└────────────────────────────────┘║")
     print("╚══════════════════════════════════╝")
-
+# Function untuk mencari produk berdasarkan nama
 def Cari_produk():
     cari_text = """
   _____           _   _____               _       _    
@@ -132,6 +133,7 @@ def Cari_produk():
     input("\nTekan enter untuk kembali ke menu")
     Clear_terminal()
     
+# Function untuk menampilkan daftar produk yang tersedia 
 def Daftar_produk():
     list =pd.read_csv("produk.csv")
     list_teks ="""
@@ -148,7 +150,7 @@ def Daftar_produk():
     
     input("\nTekan enter untuk kembali ke menu")
     Clear_terminal()
-
+# Function untuk menambahkan data absensi pegawai ke file csv absensi.csv
 def Input_absen(username):
     waktu = time.localtime()
     absensi = pd.read_csv("absensi.csv")
@@ -168,7 +170,7 @@ def Input_absen(username):
         df.to_csv("absensi.csv",mode='a',header=False ,index=False)
     else:
         print(f"Anda sudah absen pada {absenow['jam'].to_string(index=False)}")
-
+# Fuction untuk menambahkan data produk ke file csv produk.csv dan mengupdate data produk yang sudah ada
 def Update_produk():
     pdProduk = pd.read_csv("produk.csv")
     pdview = pdProduk[pdProduk["view"]==1]  
@@ -250,9 +252,7 @@ def Update_produk():
         case _:
             return
 
-        
-
-            
+# Function untuk menghapus data produk dari file csv produk.csv  
 def Hapus_produk():
     hapusteks ="""
 
@@ -302,7 +302,7 @@ def Cari_absen(collum,data):
         keterangan = ""
     print(f"Jumlah Data {keterangan}{data} :",df.shape[0])
     
-
+# Function untuk menampilkan data absensi pegawai berdasarkan bulan, tahun, tanggal, dan username
 def Absensi(username):
     usertype = pd.read_csv("users.csv")
     role = usertype[usertype['username'] == username]['role'].values[0]
@@ -357,6 +357,7 @@ def Absensi(username):
         input("\nTekan enter untuk kembali ke menu")
         Clear_terminal()
 
+# Function untuk menampilkan data mitra dan menambahkan, menghapus, dan mengedit data mitra
 def Mitra(): 
     teksmitra = """
 
@@ -414,7 +415,7 @@ def Mitra():
     input("Tekan enter untuk kembali ke menu")
     Clear_terminal()
             
-
+# Function untuk menampilkan data dispatch dan menambahkan data dispatch yang baru 
 def Dispatch(user):
     dfPegawai = pd.read_csv("users.csv")
     userole = dfPegawai[dfPegawai['username'] == user]['role'].values[0]
@@ -528,7 +529,8 @@ def Dispatch(user):
         dfProduk.to_csv("produk.csv",index=False)
         input("Tekan enter untuk kembali ke menu")
         Clear_terminal()
-        
+
+# Function untuk menampilkan data dispatch yang sudah selesai 
 def View_Dispatch():
     ViewTeks = """
 
@@ -586,9 +588,16 @@ def View_Dispatch():
             Clear_terminal()
     
 # ======================================================================================================================    
+# Menu utama program
+# Variable username dan role untuk menyimpan data username dan role user yang login
 username,role = login()
+
+# Looping menu utama program 
 while True:
+    # Menampilkan menu sesuai role user yang login
     Menu(username,role)
+    # Menampilkan menu sesuai role user yang login
+    # Menu untuk pegawai
     if role == "pegawai":
         menu = input("  Pilih menu: ")
         match menu:
@@ -612,7 +621,7 @@ while True:
                 break
             case _:
                 Clear_terminal()
-                
+    # Menu untuk admin   
     elif role == "admin":
         menu = input("  Pilih menu: ")
         match menu:
