@@ -1,5 +1,6 @@
 id,username,password,role
-1,admin,fana,admin
-2,fana,fana,pegawai
-3,yuna,yuna,pegawai
-4,rifi,rifi,pegawai
+1,manda,manda,admin
+2,fathan,fathan,pegawai
+3,rifqi,rifqi,pegawai
+4,alan,alan,pegawai
+5,neeza,neeza,pegawai

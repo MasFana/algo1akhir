@@ -1,6 +1,51 @@
 id,nama,harga,stok,view
-2,kacang,10000,0,1
-3,kaori,1000,1000,1
-4,animegokil,100,100,1
-5,testing gokil,10000,1000,0
-6,menggokil,199,10,1
+1,Kedelai,12000,50,1
+2,Padi,10000,100,1
+3,Jagung,24000,60,1
+4,Tomat,10000,80,1
+5,Wortel,14000,70,1
+6,Pupuk Organik,30000,40,1
+7,Pupuk NPK,24000,30,1
+8,Benih Cabai,40000,20,1
+9,Jeruk,12000,90,1
+10,Kentang,18000,56,1
+11,Bawang Merah,22000,44,1
+12,Bawang Putih,26000,36,1
+13,Stroberi,36000,24,1
+14,Anggur,50000,16,1
+15,Melon,20000,40,1
+16,Labu,12000,60,1
+17,Semangka,24000,30,1
+18,Kacang Hijau,18000,50,1
+19,Kacang Tanah,16000,60,1
+20,Kacang Merah,20000,50,1
+21,Terong,14000,80,1
+22,Bayam,10000,100,1
+23,Selada,12000,90,1
+24,Brokoli,24000,40,1
+25,Lobak,16000,70,1
+26,Pisang,14000,80,1
+27,Apel,30000,36,1
+28,Pisang,14000,80,1
+29,Alpukat,40000,30,1
+30,Lada,20000,50,1
+31,Kubis,18000,60,1
+32,Cabe Rawit,22000,44,1
+33,Cabe Hijau,20000,50,1
+34,Buncis,16000,70,1
+35,Sawi,14000,80,1
+36,Kembang Kol,24000,24,1
+37,Asparagus,30000,36,1
+38,Mangga,24000,40,1
+39,Pepaya,16000,60,1
+40,Durian,50000,20,1
+41,Kopi,36000,24,1
+43,Kelapa,12000,50,1
+44,Sagu,16000,60,1
+45,Sorgum,12000,70,1
+46,Kacang Panjang,14000,80,1
+47,Markisa,30000,36,1
+48,Tebu,24000,40,1
+49,Labu Parang,12000,50,1
+50,Terong,14000,80,1
+51,Kurma arab,20000,12,1
