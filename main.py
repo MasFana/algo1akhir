@@ -134,6 +134,8 @@ def Cari_produk():
     
 def Daftar_produk():
     list =pd.read_csv("produk.csv")
+    list = list[list["view"]==1]
+    list = list.drop(columns=["view"])
     list_teks ="""
  _      _     _     _____               _       _    
 | |    (_)   | |   |  __ \             | |     | |   

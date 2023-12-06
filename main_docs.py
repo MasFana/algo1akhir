@@ -136,6 +136,8 @@ def Cari_produk():
 # Function untuk menampilkan daftar produk yang tersedia 
 def Daftar_produk():
     list =pd.read_csv("produk.csv")
+    list = list[list["view"]==1]
+    list = list.drop(columns=["view"])
     list_teks ="""
  _      _     _     _____               _       _    
 | |    (_)   | |   |  __ \             | |     | |   
