@@ -473,7 +473,9 @@ def Dispatch(user):
                                                 | |                        
                                                 |_|"""
         print(adminDispatch)
-        print(dfProduk.to_string(index=False))
+        dfProdukDisplay = dfProduk[dfProduk['view'] == 1]
+        dfProdukDisplay = dfProduk.drop(columns=["view"])
+        print(dfProdukDisplay.to_string(index=False))
         try:
             id_produk = input("\nMasukkan id produk yang akan didispatch : ")
             if id_produk.isdigit() == False:
