@@ -423,8 +423,6 @@ def Dispatch(user):
     username = dfPegawai[dfPegawai['username'] == user]['username'].values[0]
     idPegawai= dfPegawai[dfPegawai['username'] == user]['id'].values[0]
     dfProduk = pd.read_csv("produk.csv")
-    dfProduk = dfProduk[dfProduk["view"]==1]
-    dfProduk = dfProduk.drop(columns=["view"])
     dfDispatch = pd.read_csv("dispatch.csv")
     dfMitra = pd.read_csv("mitra.csv")
     if userole == "pegawai":
